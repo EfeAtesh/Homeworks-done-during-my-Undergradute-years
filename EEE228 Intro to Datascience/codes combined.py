@@ -1,4 +1,49 @@
-# Import necessary libraries 
+#MIDTERM EXAM PART
+import numpy as np 
+import pandas as pd 
+from sklearn.datasets import load_iris 
+from sklearn.model_selection import train_test_split 
+from sklearn.tree import DecisionTreeClassifier 
+from sklearn.metrics import accuracy_score, confusion_matrix 
+import matplotlib.pyplot as plt 
+import seaborn as sns 
+# a-) Load the Iris dataset 
+iris = load_iris() 
+X = iris.data 
+y = iris.target 
+print("Dataset shape:", X.shape) 
+print("Number of classes:", len(np.unique(y))) 
+print("Feature names:", iris.feature_names) 
+print("Class names:", iris.target_names) 
+# b-) Split data into 70% training and 30% test 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42) 
+print("\nTraining set size:", X_train.shape) 
+print("Test set size:", X_test.shape) 
+# c-) Train the model using DecisionTreeClassifier 
+model = DecisionTreeClassifier(random_state=42) 
+model.fit(X_train, y_train) 
+print("\nModel training completed!") 
+# d-) Make predictions on test data and calculate accuracy 
+y_pred = model.predict(X_test) 
+accuracy = accuracy_score(y_test, y_pred) 
+print(f"\nModel Accuracy: {accuracy:.4f} ({accuracy*100:.2f}%)") 
+# e-) Show classification performance with confusion matrix 
+cm = confusion_matrix(y_test, y_pred) 
+# Visualize Confusion Matrix 
+plt.figure(figsize=(8, 6)) 
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',  
+xticklabels=iris.target_names,  
+yticklabels=iris.target_names) 
+plt.title('Confusion Matrix - Decision Tree Classification') 
+plt.ylabel('True Class') 
+plt.show() 
+# Detailed classification report 
+from sklearn.metrics import classification_report 
+print("\nDetailed Classification Report:") 
+print(classification_report(y_test, y_pred, target_names=iris.target_names))
+
+
+#FINAL EXAM PART
 import numpy as np 
 import pandas as pd 
 from sklearn.datasets import fetch_california_housing 
